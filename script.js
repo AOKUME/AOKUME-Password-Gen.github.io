@@ -9,11 +9,10 @@ generateBtn.onclick = function generatePassword() {
     var special = ["!", "@", "#", "&", "*", "/", "{", "}", "(", "%", "+", ".", "?"];
     var passwordCharacters = [];
     var passwordLength = prompt("Please enter password length");
-    var includeSpecialCharacters = confirm("Include special characters?");
     var includeNumbers = confirm("Include numbers?");
-    var includeLowerCharacters = confirm("Include lower characters?");
     var includeUpperCharacters = confirm("Include upper characters?");
-
+    var includeLowerCharacters = confirm("Include lower characters?");
+    var includeSpecialCharacters = confirm("Include special characters?");
 
     if (isNaN(passwordLength))
         alert("Please provide a number");
@@ -23,23 +22,28 @@ generateBtn.onclick = function generatePassword() {
             alert("Please enter a value between 8 and 128");
         else {
             if (includeNumbers)
-                passwordCharacters.concat(number);
+                passwordCharacters = passwordCharacters.concat(number);
             if (includeUpperCharacters)
-                passwordCharacters.concat(uppercase);
+                passwordCharacters = passwordCharacters.concat(uppercase);
             if (includeLowerCharacters)
-                passwordCharacters.concat(lowercase);
+                passwordCharacters = passwordCharacters.concat(lowercase);
             if (includeSpecialCharacters)
-                passwordCharacters.concat(special);
+                passwordCharacters = passwordCharacters.concat(special);
 
             var password = "";
 
-
             for (var i = 0; i < length; i++) {
                 var index = Math.floor(Math.random() * passwordCharacters.length);
-                 password += passwordCharacters[index];
-                }
-
-            alert("password is" + password);
+                password += passwordCharacters[index];
             }
+            writePassword(password);
+            //    alert("password is" + password);
         }
     }
+}
+
+
+function writePassword(password) {
+    var passwordText = document.querySelector("#password");
+    passwordText.value = password;
+}
